@@ -8,6 +8,11 @@ export default interface IScheduleTaskService{
      * @param _param 
      */
     create(_param:ScheduletTaskInputDto): Promise<IServerReturn<any>>;
+    /**
+     * 修改任务
+     * @param _param 
+     */
+    update(_id:string,_param:ScheduletTaskInputDto): Promise<IServerReturn<any>>;
     getPage(): Promise<IServerPageReturn<any>> ;
     /**
      * 加载一个任务

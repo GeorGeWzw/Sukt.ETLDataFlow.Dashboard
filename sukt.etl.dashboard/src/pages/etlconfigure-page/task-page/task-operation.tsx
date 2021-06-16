@@ -36,7 +36,7 @@ import { OperationTypeEnum } from "@/shard/operation/operationType";
 interface IProp {
     // Config: IOperationConfig;
     // taskType: TaskTypeEnum;
-    ref?: any;
+    operationRef?: any;
 }
 const codeMirrorOptions = {
     lineNumbers: true,                     //显示行号  
@@ -68,6 +68,11 @@ const TaskOperation = (props: IProp) => {
     const [ReadJsonConfigState, setReadJsonConfigState] = useState<ReadJsonConfig>(new ReadJsonConfig());
     const [taskTypeState, settaskTypeState] = useState<TaskTypeEnum>(TaskTypeEnum.ftpjson)
     /**
+     * 操作类型
+     */
+    const [operationType, setOperationType] = useState<OperationTypeEnum>(OperationTypeEnum.view);
+    const [itemId, setitemId] = useState<string>();
+    /**
      * 步骤条
      */
     const [current, setCurrent] = React.useState(0);
@@ -93,17 +98,21 @@ const TaskOperation = (props: IProp) => {
     /**
      * 父组件调用子组件事件处理
      */
-    useImperativeHandle(props.ref, () => ({
+    useImperativeHandle(props.operationRef, () => ({
         changeVal: (_operationType: OperationTypeEnum, _id?: string, _taskType?: TaskTypeEnum) => {
             _taskType && settaskTypeState(_taskType);
             switch (_operationType) {
                 case OperationTypeEnum.add:
+                    setOperationType(_operationType);
                     editOperationState(true, "添加")
                     break;
                 case OperationTypeEnum.edit:
+                    setitemId(_id);
+                    setOperationType(_operationType);
                     _id && getLoadTask(_id);
                     break;
                 case OperationTypeEnum.view:
+                    setOperationType(_operationType);
                     editOperationState(true, "查看")
                     break;
             }
@@ -137,12 +146,22 @@ const TaskOperation = (props: IProp) => {
             describe: describe,
             taskConfig: JSON.stringify(readJsonConfig)
         }
-        _scheduletaskservice.create(param).then(res => {
-            if (res.success) {
-                setOperationState({ visible: false })
-                message.success(res.message, 3)
-            }
-        })
+        if (operationType === OperationTypeEnum.add) {
+            _scheduletaskservice.create(param).then(res => {
+                if (res.success) {
+                    setOperationState({ visible: false })
+                    message.success(res.message, 3)
+                }
+            })
+        }
+        if (operationType === OperationTypeEnum.edit && itemId) {
+            _scheduletaskservice.update(itemId, param).then(res => {
+                if (res.success) {
+                    setOperationState({ visible: false })
+                    message.success(res.message, 3)
+                }
+            })
+        }
     }
     /**
      * 

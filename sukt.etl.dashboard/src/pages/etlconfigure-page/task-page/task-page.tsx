@@ -109,7 +109,7 @@ const TaskPage = () => {
      */
     const deleteRow = (_id: string) => {
         _scheduletasktaskervice.delete(_id).then((res: IServerReturn<any>) => {
-            if(res.success){
+            if (res.success) {
                 message.success(res.message, 3)
                 getTable()
             }
@@ -119,7 +119,7 @@ const TaskPage = () => {
      * 渲染子组件
      */
     const renderOperation = useMemo(() => {
-        return (<TaskOperation ref={taskOperationRef}></TaskOperation>)
+        return (<TaskOperation operationRef={taskOperationRef}></TaskOperation>)
     }, [])
     return (
         <div>
@@ -133,5 +133,4 @@ const TaskPage = () => {
         </div>
     );
 };
-
 export default TaskPage;

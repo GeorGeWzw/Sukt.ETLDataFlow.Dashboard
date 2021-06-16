@@ -5,6 +5,7 @@ import {useEffect} from 'react'
 
 const Login = (props:{history:any}) => {
   useEffect(() => {
+    // localStorage.setItem("token", "user.access_token");
     ApplicationUserManager.Login()
   },[props])
   return (

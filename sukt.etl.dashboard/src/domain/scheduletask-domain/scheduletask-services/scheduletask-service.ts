@@ -6,6 +6,9 @@ import {ScheduletTaskInputDto} from "../scheduletask-entities/scheduleTaskentiti
 import { ScheduleTaskApi } from "@/domain/apiconfig"
 
 export default class ScheduleTaskService extends BaseService implements IScheduleTaskService{
+    update(_id: string, _param: ScheduletTaskInputDto): Promise<IServerReturn<any>> {
+        return this.dataRequest.putRequest(`${ScheduleTaskApi.updateasync}/${_id}`,_param)
+    }
     /**
      * 加载一个任务
      * @param _id 
@@ -27,7 +30,8 @@ export default class ScheduleTaskService extends BaseService implements ISchedul
      * @returns 
      */
     delete(_id:string): Promise<IServerReturn<any>> {
-        return this.dataRequest.deleteRequest(ScheduleTaskApi.deleteasync,{id:_id})
+        debugger
+        return this.dataRequest.deleteRequest(`${ScheduleTaskApi.deleteasync}/${_id}`)
     }
     /**
      * 分页获取数据

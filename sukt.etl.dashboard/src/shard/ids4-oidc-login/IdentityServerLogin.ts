@@ -31,6 +31,7 @@ export class ApplicationUserManager extends UserManager{
             revokeAccessTokenOnSignout:true,
             automaticSilentRenew:true,
         })
+        debugger
         this.signinRedirect();
     }
     /**

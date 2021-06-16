@@ -7,6 +7,7 @@ export const DbconnApi = {
 }
 export const ScheduleTaskApi = {
   createasync: "/ScheduleTask/CreateAsync",
+  updateasync: "/ScheduleTask/UpdateAsync",
   deleteasync: "/ScheduleTask/DeleteAsync",
   getloadasync: "/ScheduleTask/GetLoadAsync",
   getpageasync: "/ScheduleTask/GetPageLoadAsync",

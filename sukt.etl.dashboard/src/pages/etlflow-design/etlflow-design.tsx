@@ -61,7 +61,7 @@ class GraphPage extends React.Component {
         message.warning(
           typeof node.data.nodeType !== "undefined" &&
             node.data.nodeType === NodeTypeEnum.startNode
-            ? "开始节点不允许配置属性!": "结束节点不允许配置属性!",
+            ? "开始节点不允许配置属性!" : "结束节点不允许配置属性!",
           3
         );
         return;
@@ -129,13 +129,13 @@ class GraphPage extends React.Component {
         </nav>
         <div className="flow-design-panel-graph">
           <Row className="flow-design-panel-toolbar">
+            <Button type="primary" onClick={() => this.onUndo()} >导入任务</Button>
             <Button type="primary" onClick={() => this.onRedo()}>重做</Button>
             <Button type="primary" onClick={() => this.onUndo()} >撤消</Button>
           </Row>
           <div id="graph">
             <div id="destiny-minimap" className="minimapContainer"></div>
             <div id="container">
-
             </div>
           </div>
         </div>
