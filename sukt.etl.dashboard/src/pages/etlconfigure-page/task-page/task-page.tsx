@@ -1,19 +1,15 @@
-import { Button, Table, Cascader, PaginationProps, Popover, Row, message } from "antd";
+import { Button, Table, Cascader, PaginationProps, Popover, Row, message, Tag } from "antd";
 import React, { useEffect, useMemo, useState, useRef } from "react";
-
-import { Guid } from "guid-typescript";
 import IDbConnectionService from "@/domain/dbconnection-domain/dbconnection-service/idbconnectionservice";
-import { IOperationConfig } from "../../../shard/operation/operationConfig"
-import { ISelectListItem, IServerReturn } from "@/shard/ajax/response";
+import { IServerReturn } from "@/shard/ajax/response";
 import { IocTypes } from "@/shard/inversionofcontrol/ioc-config-types";
 import TaskOperation from "./task-operation"
-import { TaskTypeEnum } from "@/domain/scheduletask-domain/scheduletask-entities/tasktype-enum"
 import { TaskTypeEnumList } from "@/domain/scheduletask-domain/scheduletask-entities/tasktypeConstans"
 import useHookProvider from "@/shard/dependencyInjection/ioc-hook-provider";
 import IScheduleTaskService from "@/domain/scheduletask-domain/scheduletask-services/ischeduletask-service";
 import { initPaginationConfig } from "@/shard/ajax/request";
 import { OperationTypeEnum } from "@/shard/operation/operationType";
-
+import { ArrowDownOutlined } from '@ant-design/icons';
 const TaskPage = () => {
 
     const [tableData, setTableData] = useState([]);
@@ -50,6 +46,11 @@ const TaskPage = () => {
             title: "任务类型",
             dataIndex: "taskType",
             key: "taskType",
+            render: (text: any, record: any) => {
+                return <div>
+                    <Tag color="cyan"><ArrowDownOutlined />FtpJson读取</Tag>
+                </div>
+            }
         },
         {
             title: "操作",
@@ -119,7 +120,7 @@ const TaskPage = () => {
      * 渲染子组件
      */
     const renderOperation = useMemo(() => {
-        return (<TaskOperation operationRef={taskOperationRef}></TaskOperation>)
+        return (<TaskOperation operationRef={taskOperationRef} onCallbackEvent={getTable}></TaskOperation>)
     }, [])
     return (
         <div>
@@ -127,6 +128,7 @@ const TaskPage = () => {
                 <Popover placement="bottomLeft" visible={cascader.visible} title="任务类型" content={content} onVisibleChange={handleVisibleChange} trigger="click">
                     <Button type="primary">添加</Button>
                 </Popover>
+                <Button type="primary" onClick={() => { getTable() }}>查询</Button>
             </Row>
             <Table bordered columns={columns} dataSource={tableData} loading={loading} pagination={pagination} />
             {renderOperation}

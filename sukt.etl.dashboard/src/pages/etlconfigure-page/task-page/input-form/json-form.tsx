@@ -27,7 +27,6 @@ const JsonForm = (props: IProp) => {
     const [jsoninputFormData] = Form.useForm();
     const [jsonReadConfigFormData] = Form.useForm();
     const jsonRef = useRef(null);
-
     useImperativeHandle(props.onRef, () => {
         return {
             getSonformValues: callParent
@@ -35,14 +34,10 @@ const JsonForm = (props: IProp) => {
     });
     const callParent = () => {
         const readfrom = jsonReadConfigFormData.getFieldsValue();
-        const jsonconfig = jsoninputFormData.getFieldsValue()
-        props.onGetFormFiled && props.onGetFormFiled({ ftpConfig: jsonconfig, jsonReadConfig: readfrom.readConfig })
+        const jsonconfig = jsoninputFormData.getFieldsValue();
+        let configstr= JSON.stringify({ ftpConfig: jsonconfig, jsonReadConfig: readfrom.readConfig });
+        props.onGetFormFiled && props.onGetFormFiled(configstr);
     }
-    const onFinish = (values: any) => {
-        console.log(jsonReadConfigFormData.getFieldsValue())
-        console.log('Received values of form:', values);
-    };
-    // const [swichState, setswichState] = useState<boolean>(false);
     useEffect(() => {
         jsoninputFormData.setFieldsValue(props.ReadJsonConfigData.ftpConfig);
         jsonReadConfigFormData.setFieldsValue({ readConfig: props.ReadJsonConfigData.jsonReadConfig });
@@ -86,7 +81,7 @@ const JsonForm = (props: IProp) => {
                     </Form>
                 </TabPane>
                 <TabPane tab="读取配置" key="2">
-                    <Form form={jsonReadConfigFormData}  {...formItemLayout} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
+                    <Form form={jsonReadConfigFormData}  {...formItemLayout} name="dynamic_form_nest_item"  autoComplete="off">
                         <Form.List name="readConfig">
                             {(fields, { add, remove }) => (
                                 <>
@@ -131,9 +126,6 @@ const JsonForm = (props: IProp) => {
                                 </>
                             )}
                         </Form.List>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit">Submit</Button>
-                        </Form.Item>
                     </Form>
                 </TabPane>
             </Tabs>

@@ -23,7 +23,7 @@ import { ftpConfigDto, ReadJsonConfig, JsonReadConfigInputDto } from "@/domain/s
 import CodeMirror from 'react-codemirror';
 import IDbConnectionService from "@/domain/dbconnection-domain/dbconnection-service/idbconnectionservice";
 import { IOperationConfig } from "../../../shard/operation/operationConfig"
-import { ISelectListItem, IServerReturn } from "@/shard/ajax/response";
+import { IServerReturn } from "@/shard/ajax/response";
 import { IocTypes } from "@/shard/inversionofcontrol/ioc-config-types";
 import JsonForm from "./input-form/json-form"
 import TaskGeneralConfig from "./task-general-config"
@@ -36,7 +36,13 @@ import { OperationTypeEnum } from "@/shard/operation/operationType";
 interface IProp {
     // Config: IOperationConfig;
     // taskType: TaskTypeEnum;
+    /**
+     */
     operationRef?: any;
+    /**
+     * 操作成功回调事件
+     */
+    onCallbackEvent?: any;
 }
 const codeMirrorOptions = {
     lineNumbers: true,                     //显示行号  
@@ -104,6 +110,8 @@ const TaskOperation = (props: IProp) => {
             switch (_operationType) {
                 case OperationTypeEnum.add:
                     setOperationType(_operationType);
+                    settaskbasicState(new ScheduletTaskInputDto());
+                    setReadJsonConfigState(new ReadJsonConfig());
                     editOperationState(true, "添加")
                     break;
                 case OperationTypeEnum.edit:
@@ -136,7 +144,7 @@ const TaskOperation = (props: IProp) => {
     const onSave = () => {
         jsoninputRef.current.getSonformValues()
     }
-    const getjsonFormFiledValue = (readJsonConfig: ReadJsonConfig) => {
+    const getConfigValue = (configjson: string) => {
         const { taskName, taskNumber, describe } = taskbasicState;
         const param = {
             id: Guid.EMPTY.toString(),
@@ -144,21 +152,29 @@ const TaskOperation = (props: IProp) => {
             taskNumber: taskNumber,
             taskType: taskTypeState,
             describe: describe,
-            taskConfig: JSON.stringify(readJsonConfig)
+            taskConfig: configjson
         }
+        /**
+         * 新增保存
+         */
         if (operationType === OperationTypeEnum.add) {
             _scheduletaskservice.create(param).then(res => {
                 if (res.success) {
                     setOperationState({ visible: false })
                     message.success(res.message, 3)
+                    props.onCallbackEvent && props.onCallbackEvent();
                 }
             })
         }
+        /**
+         * 修改保存
+         */
         if (operationType === OperationTypeEnum.edit && itemId) {
             _scheduletaskservice.update(itemId, param).then(res => {
                 if (res.success) {
                     setOperationState({ visible: false })
                     message.success(res.message, 3)
+                    props.onCallbackEvent && props.onCallbackEvent();
                 }
             })
         }
@@ -233,7 +249,7 @@ const TaskOperation = (props: IProp) => {
                 }
                 {
                     taskTypeState === TaskTypeEnum.ftpjson && current === steps.length - 1 ?
-                        <JsonForm ReadJsonConfigData={ReadJsonConfigState} onGetFormFiled={getjsonFormFiledValue} onRef={jsoninputRef}></JsonForm>
+                        <JsonForm ReadJsonConfigData={ReadJsonConfigState} onGetFormFiled={getConfigValue} onRef={jsoninputRef}></JsonForm>
                         : null
                 }
             </Modal>

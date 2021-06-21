@@ -31,13 +31,12 @@ export class ApplicationUserManager extends UserManager{
             revokeAccessTokenOnSignout:true,
             automaticSilentRenew:true,
         })
-        debugger
         this.signinRedirect();
     }
     /**
      * 退出登录
      */
-    public async LogOut()
+    public async outLogin()
     {
         this.signoutRedirect();
     }
