@@ -44,3 +44,28 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+更新依赖包
+
+```bash
+yarn upgrade-interactive
+```
+
+更新 yarn
+
+```bash
+yarn set version berry
+```
+
+导入 yarn 更新依赖包插件
+
+```bash
+yarn plugin import interactive-tools
+```
+
+导入 yarn TypeScript 库自动加入插件
+
+```bash
+yarn plugin import typescript
+```
