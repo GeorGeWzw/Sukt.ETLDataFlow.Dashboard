@@ -1,4 +1,4 @@
-import { ISelectListItem, IServerPageReturn, IServerReturn } from "../../../shard/ajax/response"
+import { IServerPageReturn, IServerReturn } from "../../../shard/ajax/response"
 
 import BaseService from "../../baseservice/baseservice"
 import IScheduleTaskService from "./ischeduletask-service"

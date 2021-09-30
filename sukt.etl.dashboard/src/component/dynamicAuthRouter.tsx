@@ -34,9 +34,9 @@ const MainRouter: IMenuRoute[] = [
     ]
   }
 ]
-interface IProp {
-  config: IMenuRoute[]
-}
+// interface IProp {
+//   config: IMenuRoute[]
+// }
 /**
  * 动态路由组件
  */

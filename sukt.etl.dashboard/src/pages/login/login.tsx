@@ -1,6 +1,6 @@
 // import ApplicationUserManager from '@/shared/ids4/identityServerLogin';
 
-import ApplicationUserManager from "@/shard/ids4-oidc-login/IdentityServerLogin"
+// import ApplicationUserManager from "@/shard/ids4-oidc-login/IdentityServerLogin"
 import {useEffect} from 'react'
 
 const Login = (props:{history:any}) => {

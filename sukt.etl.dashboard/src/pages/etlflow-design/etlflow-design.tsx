@@ -40,6 +40,8 @@ class GraphPage extends React.Component {
       this.canRedo = this.graph.history.canRedo();
       this.canUndo = this.graph.history.canUndo();
     });
+
+
     /**
      * 线连接到锚点事件
      */
@@ -117,6 +119,9 @@ class GraphPage extends React.Component {
     this.graph.history.undo();
     console.log(2)
   }
+  save() {
+      console.log(this.graph.getCells());
+  }
   render() {
     return (
       <div id="flow-design-panel">
@@ -132,6 +137,8 @@ class GraphPage extends React.Component {
             <Button type="primary" onClick={() => this.onUndo()} >导入任务</Button>
             <Button type="primary" onClick={() => this.onRedo()}>重做</Button>
             <Button type="primary" onClick={() => this.onUndo()} >撤消</Button>
+            <Button type="primary" onClick={() => this.save()} >链接Websocket</Button>
+            <Button type="primary" onClick={() => this.onUndo()} >发送消息</Button>
           </Row>
           <div id="graph">
             <div id="destiny-minimap" className="minimapContainer"></div>

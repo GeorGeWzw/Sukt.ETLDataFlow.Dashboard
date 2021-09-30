@@ -1,6 +1,5 @@
 import { Button, Table, Cascader, PaginationProps, Popover, Row, message, Tag } from "antd";
-import React, { useEffect, useMemo, useState, useRef } from "react";
-import IDbConnectionService from "@/domain/dbconnection-domain/dbconnection-service/idbconnectionservice";
+import  { useEffect, useMemo, useState, useRef } from "react";
 import { IServerReturn } from "@/shard/ajax/response";
 import { IocTypes } from "@/shard/inversionofcontrol/ioc-config-types";
 import TaskOperation from "./task-operation"
@@ -19,12 +18,11 @@ const TaskPage = () => {
     const taskOperationRef = useRef<any>();
     const [loading, setloading] = useState<boolean>(true);
     const _scheduletasktaskervice: IScheduleTaskService = useHookProvider(IocTypes.ScheduleTaskService);
-    const _dbconnectionservice: IDbConnectionService = useHookProvider(IocTypes.DbConnectionService);
     const [pagination, setPagination] = useState<PaginationProps>(
         initPaginationConfig
     );
     const [cascader, setCascader] = useState({ visible: false });
-    const [cascadervalue, setCascaderValue] = useState([]);
+    const [cascadervalue] = useState([]);
     useEffect(() => {
         getTable();
     }, [pagination]);

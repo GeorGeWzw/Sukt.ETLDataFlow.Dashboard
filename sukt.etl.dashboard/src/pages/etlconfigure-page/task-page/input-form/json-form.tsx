@@ -1,5 +1,5 @@
 import { Button, Space, Switch, Form, Input, Select, Tabs } from "antd";
-import { ReadJsonConfig, JsonReadConfigInputDto } from "@/domain/scheduletask-domain/scheduletask-entities/input-entities/json-input"
+import { ReadJsonConfig } from "@/domain/scheduletask-domain/scheduletask-entities/input-entities/json-input"
 import { useEffect, useImperativeHandle, useRef } from 'react'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { FieldTypeEnumList } from "@/domain/scheduletask-domain/scheduletask-entities/tasktypeConstans"

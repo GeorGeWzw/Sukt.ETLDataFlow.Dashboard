@@ -9,6 +9,10 @@ const {
   const path = require("path");
   // const { name } = require("./package");
   module.exports = {
+    // rules: {
+    //   "no-unused-vars": "off",
+    //   "@typescript-eslint/no-unused-vars": ["off"],
+    // },
     webpack: override(
       addDecoratorsLegacy(),
       // ),

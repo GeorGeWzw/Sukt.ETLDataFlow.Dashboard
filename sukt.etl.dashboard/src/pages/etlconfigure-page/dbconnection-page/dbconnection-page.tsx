@@ -1,5 +1,5 @@
-import { Button, PaginationProps, Row, Spin, Table, message } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
+import { Button, PaginationProps, Row,  Table, message } from "antd";
+import { useEffect, useState } from "react";
 
 import DBconnectionMetadata from "./dbconnection-metadata"
 import DbconnectionOperation from "./dbconnection-operation"

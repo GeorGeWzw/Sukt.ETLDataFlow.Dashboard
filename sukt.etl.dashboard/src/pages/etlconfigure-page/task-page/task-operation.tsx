@@ -17,11 +17,10 @@ import "codemirror/addon/display/autorefresh";
 import "codemirror/addon/hint/anyword-hint.js";
 
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Modal, Row, Select, Steps, message } from "antd";
+import { Button,   Modal, Row,  Steps, message } from "antd";
 import React, { useEffect, useImperativeHandle, useState, useRef } from "react";
-import { ftpConfigDto, ReadJsonConfig, JsonReadConfigInputDto } from "@/domain/scheduletask-domain/scheduletask-entities/input-entities/json-input"
-import CodeMirror from 'react-codemirror';
-import IDbConnectionService from "@/domain/dbconnection-domain/dbconnection-service/idbconnectionservice";
+import { ReadJsonConfig} from "@/domain/scheduletask-domain/scheduletask-entities/input-entities/json-input"
+// import CodeMirror from 'react-codemirror';
 import { IOperationConfig } from "../../../shard/operation/operationConfig"
 import { IServerReturn } from "@/shard/ajax/response";
 import { IocTypes } from "@/shard/inversionofcontrol/ioc-config-types";
@@ -44,25 +43,14 @@ interface IProp {
      */
     onCallbackEvent?: any;
 }
-const codeMirrorOptions = {
-    lineNumbers: true,                     //显示行号  
-    mode: { name: "text/x-csharp" },          //定义mode  
-    extraKeys: { "Ctrl": "autocomplete" },   //自动提示配置  
-    indentUnit: 4, // 智能缩进单位为4个空格长度
-    theme: "erlang-dark",                  //选中的theme  
-    gutters: [
-        "CodeMirror-linenumbers",
-        "CodeMirror-foldgutter",
-        "CodeMirror-lint-markers"
-    ],               //选中的theme  
-}
+
 const { Step } = Steps;
 const TaskOperation = (props: IProp) => {
     const [operationState, setOperationState] = useState<IOperationConfig>({ visible: false })
     /**
      * 
      */
-    const _dbconnectionservice: IDbConnectionService = useHookProvider(IocTypes.DbConnectionService);
+    // const _dbconnectionservice: IDbConnectionService = useHookProvider(IocTypes.DbConnectionService);
     const _scheduletaskservice: IScheduleTaskService = useHookProvider(IocTypes.ScheduleTaskService);
     /**
      * 任务基础配置

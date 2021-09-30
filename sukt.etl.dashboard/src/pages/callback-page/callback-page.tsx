@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 
 import  ApplicationUserManager  from '@/shard/ids4-oidc-login/IdentityServerLogin';
-import PropTypes from 'prop-types'
-import { Spin } from 'antd';
 
 const Callbackpage = (props: { history: any }) => {
-  const [loading, setLoad] = useState(true);
+  // const [loading, setLoad] = useState(true);
   const loginCallbackFn = async () => {
     debugger
     await ApplicationUserManager.signinRedirectCallback();
@@ -16,7 +14,7 @@ const Callbackpage = (props: { history: any }) => {
       debugger
       // getMenus();
       props.history.push("/home");
-      setLoad(false);
+      // setLoad(false);
       props.history.go();
     }
   }

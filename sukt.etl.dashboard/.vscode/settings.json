@@ -12,6 +12,7 @@
         "Schedulet",
         "Selectlist",
         "Sraph",
+        "Taskentitie",
         "Unmount",
         "antd",
         "antv",
@@ -28,6 +29,7 @@
         "finesh",
         "ftpjson",
         "getcontainer",
+        "getloadasync",
         "getmetadata",
         "getmetadataasync",
         "getpage",
@@ -50,11 +52,13 @@
         "resizecontainer",
         "resizeheight",
         "resizewidth",
+        "scheduletask",
         "selectlistitemasync",
         "setloading",
         "tabledata",
         "targer",
         "targetfile",
+        "tasktype",
         "treedto"
     ]
 }
